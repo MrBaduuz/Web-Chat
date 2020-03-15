@@ -1,18 +1,20 @@
-let socket = io('http://localhost:1234/');
+const area = document.querySelector('#area');
+const login = document.querySelector('#name');
+const msg = document.querySelector('#text');
+const button = document.querySelector('#submit');
+const socket = io('http://localhost:1234/');
 
-function setup() {
-	createCanvas(400, 400);
-	background(50);
-	socket.on('mouse', (data) => {
-		fill(255, 0, 255);
-		noStroke();
-		ellipse(data.x, data.y, 30, 30);
-	});
-}
+button.addEventListener('click', () => {
+	let data = {
+		user: login.value,
+		msg: msg.value
+	}
+	socket.emit('send', data);
+	msg.value = "";
+})
 
-function mouseDragged() {
-	fill(255);
-	noStroke();
-	ellipse(mouseX, mouseY, 30, 30);
-	socket.emit("mouse", {x:mouseX, y:mouseY});
-}
+socket.on('send', (data) => {
+	let name = data.user;
+	if(data.user === login.value) name = "You";
+	area.innerHTML += '<p>' + name + ': ' + data.msg;
+});
