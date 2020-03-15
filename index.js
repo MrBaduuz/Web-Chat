@@ -13,5 +13,6 @@ io.on('connection', (socket) => {
   console.log('a user connected');
   socket.on('mouse', (data) => {
   	console.log("X: " + data.x + "  Y: " + data.y);
+  	socket.broadcast.emit('mouse', data);
   });
 });
