@@ -2,12 +2,13 @@
 <html>
 <head>
 	<title>Chat Website</title>
+	<link href="style.css" rel="stylesheet">
 </head>
 <body>
-	<div id="area" width="400" height="400"></div>
-	<input type="text" id="name">
-	<input type="text" id="text">
-	<button id="submit">Send</button>
+	<input id="username_input" placeholder="Input your name">
+	<button id="submit_login">Login</button>
+	<div id="text_area" hidden="true"></div>
+	<input id="message_input" placeholder="Your Message" hidden="true">
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="sketch.js"></script>
 </body>

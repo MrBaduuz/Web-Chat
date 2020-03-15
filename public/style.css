@@ -1,0 +1,61 @@
+body {
+	font-family: sans-serif;
+	color: #ffffff;
+	background: #303030;
+}
+
+#text_area {
+	margin: auto;
+	width: 50%;
+	min-width: 400px;
+	min-height: 400px;
+	max-height: 400px;
+	overflow-y: auto;
+	border: 3px solid green;
+}
+
+#message_input {
+	border-radius: 25px;
+	margin: auto;
+	width: 50%;
+	min-width: 400px;
+	height: 30px;
+}
+
+#username_input {
+	border-radius: 25px;
+	width: 180px;
+	height: 30px;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	margin-left: -102px;
+	margin-top: -15px;
+	padding-left: 20px;
+}
+#submit_login {
+	border-radius: 15px;
+	width: 200px;
+	height: 30px;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	margin-left: -98px;
+	margin-top: 30px;
+}
+
+#username_input:focus {
+	outline: none !important;
+}
+
+#submit_login:focus {
+	outline: none !important;
+}
+
+#send_message:focus {
+	outline: none !important;
+}
+
+#message_input:focus {
+	outline: none !important;
+}

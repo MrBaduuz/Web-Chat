@@ -10,9 +10,12 @@ console.log("Server running");
 const io = socket(server);
 
 io.on('connection', (socket) => {
-  console.log('A user connected');
-  socket.on('send', (data) => {
-  	console.log("Message received from " + data.user);
-  	io.sockets.emit('send', data);
+	socket.on('login', (data) => {
+		console.log("User " + data.user + " logged in");
+		socket.emit('login', {can_login: true});
+	});
+
+  socket.on('sendMsg', (data) => {
+  	io.sockets.emit('sendMsg', data);
   });
 });

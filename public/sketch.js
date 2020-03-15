@@ -1,20 +1,51 @@
-const area = document.querySelector('#area');
-const login = document.querySelector('#name');
-const msg = document.querySelector('#text');
-const button = document.querySelector('#submit');
+const bdy = document.querySelector('body');
+const name_input = document.querySelector('#username_input');
+name_input.onkeydown = (evt) =>  {if(name_input.value != "" && evt.key == 'Enter') socket.emit('login', {user: name_input.value});}
+const submit_name = document.querySelector('#submit_login');
+const msg_input = document.querySelector('#message_input');
+msg_input.onkeydown = (evt) => {if(evt.key == 'Enter') sendMessage();}
+const text_area = document.querySelector('#text_area');
+loginWindow();
+
 const socket = io('http://localhost:1234/');
 
-button.addEventListener('click', () => {
-	let data = {
-		user: login.value,
-		msg: msg.value
-	}
-	socket.emit('send', data);
-	msg.value = "";
-})
+let username = '';
 
-socket.on('send', (data) => {
-	let name = data.user;
-	if(data.user === login.value) name = "You";
-	area.innerHTML += '<p>' + name + ': ' + data.msg;
+submit_name.addEventListener('click', () => {
+	if(name_input.value != "") socket.emit('login', {user: name_input.value});
 });
+
+socket.on('login', (data) => {
+	if(data.can_login == true) {
+		username = name_input.value;
+		chatWindow();
+	}
+});
+
+socket.on('sendMsg', (data) => {
+	let name = data.user;
+	if(name === username) name = 'You';
+		text_area.innerHTML += '<p><b> ' + name + ': </b>' + data.msg;
+});
+
+function loginWindow() {
+	bdy.removeChild(msg_input);
+	bdy.removeChild(text_area);
+}
+
+function chatWindow() {
+	bdy.removeChild(name_input);
+	bdy.removeChild(submit_name);
+	text_area.hidden = false;
+	bdy.appendChild(text_area);
+	msg_input.hidden = false;
+	bdy.appendChild(msg_input);
+}
+
+function sendMessage() {
+	let data = {
+		user: username,
+		msg: msg_input.value
+	}
+	socket.emit('sendMsg', data);
+}
