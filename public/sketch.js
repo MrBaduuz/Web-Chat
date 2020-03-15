@@ -43,9 +43,12 @@ function chatWindow() {
 }
 
 function sendMessage() {
-	let data = {
-		user: username,
-		msg: msg_input.value
+	if(msg_input.value != '') {
+		let data = {
+			user: username,
+			msg: msg_input.value
+		}
+		socket.emit('sendMsg', data);
+		msg_input.value = '';
 	}
-	socket.emit('sendMsg', data);
 }
