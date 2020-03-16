@@ -26,6 +26,7 @@ socket.on('sendMsg', (data) => {
 	let name = data.user;
 	if(name === username) name = 'You';
 		text_area.innerHTML += '<p><b> ' + name + ': </b>' + data.msg;
+		text_area.scrollTop = text_area.scrollHeight;
 });
 
 function loginWindow() {
