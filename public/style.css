@@ -70,10 +70,6 @@ body {
 	outline: none !important;
 }
 
-#send_message:focus {
-	outline: none !important;
-}
-
 #message_input:focus {
 	outline: none !important;
 }
